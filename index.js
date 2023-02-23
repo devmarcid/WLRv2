@@ -3,7 +3,7 @@ const path = require('node:path');
 const { Client, Collection, Events, GatewayIntentBits } = require('discord.js');
 const { token } = require('./config.json');
 
-const client = new Client({ intents: [GatewayIntentBits.Guilds] });
+const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.MessageContent, GatewayIntentBits.GuildMessages, GatewayIntentBits.GuildMembers, GatewayIntentBits.GuildMessageReactions] });
 
 client.commands = new Collection();
 
@@ -48,6 +48,17 @@ client.on(Events.InteractionCreate, async interaction => {
 	}
 });
 
+client.on(Events.MessageCreate, async (message) => {
 
+	if (message.author.bot) {
+		return;
+	}
+
+	let cmds = [",ss", ",addss", ",meme", ",addmeme", ",memepermit", ",sspermit", ",memerevoke", ",ssrevoke", ",ssperms", ",memeperms"];
+	if (cmds.includes(message.content.split(" ")[0])) {
+		message.reply("WIP; Will be back soon.");
+		return;
+	}
+});
 
 
