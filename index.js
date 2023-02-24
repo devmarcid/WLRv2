@@ -54,7 +54,7 @@ client.on(Events.MessageCreate, async (message) => {
 		return;
 	}
 
-	let cmds = [",ss", ",addss", ",meme", ",addmeme", ",memepermit", ",sspermit", ",memerevoke", ",ssrevoke", ",ssperms", ",memeperms"];
+	let cmds = [",memepermit", ",sspermit", ",memerevoke", ",ssrevoke", ",ssperms", ",memeperms"];
 	if (cmds.includes(message.content.split(" ")[0])) {
 		message.reply("WIP; Will be back soon.");
 		return;
@@ -63,12 +63,33 @@ client.on(Events.MessageCreate, async (message) => {
 	//going to use switch statements/functions from seperate files for ',command's instead 
 
 	const c = message.content.split(" ")[0];
-	
+	const ironmanData = require("./custom_commands/ironman.js");
+	const speakCommand = require("./custom_commands/speak.js");
+	const hc = require("./custom_commands/screenshot.js");
+
 	switch (c) {
 		case ",ironman":
-			const ironmanData = require("./custom_commands/ironman.js");
 			ironmanData.genIronman(client, message);
 			return;
+		case ",speak":
+			speakCommand.makeEcho(client, message);
+			return;
+		case ",ss":
+			hc.sendScreenshot(client, message)
+			return;
+		case ",m": 
+			hc.sendMeme(client, message);
+			return;
+		case ",meme":
+			//repeat because I am using it as an alias.
+			hc.sendMeme(client, message);
+			return;
+		case ",addss":
+			message.reply("WIP");
+			break;
+		case ",addm":
+			message.reply("WIP");
+			break;
 		default:
 			return;
 	}
