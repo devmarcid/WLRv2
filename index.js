@@ -1,9 +1,10 @@
 const fs = require('node:fs');
 const path = require('node:path');
-const { Client, Collection, Events, GatewayIntentBits } = require('discord.js');
+const { Client, Collection, Events, GatewayIntentBits, Partials } = require('discord.js');
 const { token } = require('./config.json');
 
-const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.MessageContent, GatewayIntentBits.GuildMessages, GatewayIntentBits.GuildMembers, GatewayIntentBits.GuildMessageReactions] });
+const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.MessageContent, GatewayIntentBits.GuildMessages, GatewayIntentBits.GuildMembers, GatewayIntentBits.GuildMessageReactions],
+	partials: [Partials.Message, Partials.Channel, Partials.Reaction] });
 
 client.commands = new Collection();
 
@@ -95,4 +96,31 @@ client.on(Events.MessageCreate, async (message) => {
 	}
 });
 
+client.on(Events.MessageReactionAdd, async (reaction, user) => {
 
+
+	if (reaction.partial) {
+        try {
+            console.log("await reaction.fetch();");
+            await reaction.fetch();
+        } catch (error) {
+            console.log(error);
+            return;
+        }
+    }
+
+	try {
+
+		const sBoard = require("./skullboard/skullboard.js");
+		sBoard.initSkullboard(client, reaction, user);
+
+	} catch (error) {
+		console.log("skullboard didn't work");
+		console.log(error);
+	}
+
+	
+
+
+
+});
