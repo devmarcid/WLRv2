@@ -58,15 +58,14 @@ module.exports = {
             
         } else {
             console.log(action);
-        }
-
-        if (selection == 'screenshot') {
-            var ss = getSingleRandom(screenshots)[0];
-            await interaction.reply(ss);
-        }
-        if (selection == 'meme') {
-            var mm = getSingleRandom(memes)[0];
-            await interaction.reply(mm);
-        }
+			 if (selection == 'screenshot') {
+				var ss = getSingleRandom(screenshots)[0];
+				await interaction.reply(ss);
+			}
+			if (selection == 'meme') {
+				var mm = getSingleRandom(memes)[0];
+				await interaction.reply(mm);
+			}
+		}
     }
-}
+};
