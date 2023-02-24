@@ -2,6 +2,7 @@ const { SlashCommandBuilder } = require('discord.js');
 const fs = require("fs");
 const memes = require("./data/memes.json");
 const screenshots = require("./data/screenshots.json");
+const permissions = require("./data/permissions.json");
 
 const data = new SlashCommandBuilder()
     .setName('homiecord')
@@ -11,9 +12,18 @@ const data = new SlashCommandBuilder()
         .setDescription('Execute given HC command.')
         .setRequired(true)
         .addChoices(
-            { name: 'Screenshot', value: 'screenshot' },
-            { name: 'Meme', value: 'meme' }
-        ));
+            { name: 'Screenshot', value: 'screenshots' },
+            { name: 'Meme', value: 'memes' }
+        )
+    ).addStringOption(option =>
+        option.setName('action')
+        .setDescription('Add or Delete a screenshot')
+        .setRequired(false)
+        .addChoices(
+            { name: 'Add', value: 'add' },
+            { name: 'Delete', value: 'delete' }
+        )
+    );
 
 function getSingleRandom(arr) {
     var n = 1;
@@ -34,6 +44,21 @@ module.exports = {
     data,
     async execute(interaction) {
         const selection = interaction.options.getString('cmd');
+        const action = interaction.options.getString('action');
+
+        if (action) {
+
+            if (permissions[selection].includes(interaction.user.id)) {
+                await interaction.reply("WIP..");
+                return;
+            } else {
+                await interaction.reply("No permission..");
+                return;
+            }
+            
+        } else {
+            console.log(action);
+        }
 
         if (selection == 'screenshot') {
             var ss = getSingleRandom(screenshots)[0];
