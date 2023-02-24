@@ -59,6 +59,19 @@ client.on(Events.MessageCreate, async (message) => {
 		message.reply("WIP; Will be back soon.");
 		return;
 	}
+
+	//going to use switch statements/functions from seperate files for ',command's instead 
+
+	const c = message.content.split(" ")[0];
+	
+	switch (c) {
+		case ",ironman":
+			const ironmanData = require("./custom_commands/ironman.js");
+			ironmanData.genIronman(client, message);
+			return;
+		default:
+			return;
+	}
 });
 
 
