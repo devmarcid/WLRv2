@@ -1,4 +1,4 @@
-const skullboard = require("../data/skullboard.json");
+var skullboard = require("../data/skullboard.json");
 const { EmbedBuilder } = require("discord.js");
 const fs = require("fs");
 
