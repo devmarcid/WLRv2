@@ -31,7 +31,7 @@ async function startSkullboard(client, reaction, user, skull) {
             skullboard[reaction.message.id.toString()] = {}
             skullboard[reaction.message.id.toString()]['skullboard_post'] = skullboardPost.id;
             skullboard = JSON.stringify(skullboard);
-            fs.writeFileSync("./../data/skullboard.json", skullboard);
+            fs.writeFileSync("../data/skullboard.json", skullboard);
 
         } else if (count > 3) {
 
