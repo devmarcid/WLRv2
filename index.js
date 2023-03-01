@@ -66,7 +66,7 @@ client.on(Events.MessageCreate, async (message) => {
 	const c = message.content.split(" ")[0];
 	const ironmanData = require("./custom_commands/ironman.js");
 	const speakCommand = require("./custom_commands/speak.js");
-	const hc = require("./custom_commands/screenshot.js");
+	const hc = require("./custom_commands/hc_content.js");
 
 	switch (c) {
 		case ",ironman":
@@ -76,20 +76,20 @@ client.on(Events.MessageCreate, async (message) => {
 			speakCommand.makeEcho(client, message);
 			return;
 		case ",ss":
-			hc.sendScreenshot(client, message)
+			hc.sendContent(client, message, 'screenshot');
 			return;
 		case ",m": 
-			hc.sendMeme(client, message);
+			hc.sendContent(client, message, 'meme');
 			return;
 		case ",meme":
 			//repeat because I am using it as an alias.
-			hc.sendMeme(client, message);
+			hc.sendContent(client, message, 'meme');
 			return;
 		case ",addss":
-			message.reply("WIP");
-			break;
+			hc.addContent(client, message, 'screenshot');
+			return;
 		case ",addm":
-			message.reply("WIP");
+			hc.addContent(client, message, 'meme');
 			break;
 		default:
 			return;
