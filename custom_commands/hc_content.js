@@ -51,10 +51,13 @@ function addContent(client, message, content_type) {
             case 'screenshot':
                 screenshots.push(link);
                 fs.writeFileSync("./custom_commands/data/screenshots.json", JSON.stringify(screenshots));
-                break;
+                message.reply('added');
+                return;
             case 'meme':
                 memes.push(link);
                 fs.writeFileSync("./custom_commands/data/memes.json", JSON.stringify(memes));
+                message.reply('added');
+                return;
         }
     } catch (error) {
         message.reply("Error adding...");
