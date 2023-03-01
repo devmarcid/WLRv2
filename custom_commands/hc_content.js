@@ -49,15 +49,15 @@ function addContent(client, message, content_type) {
     try {
         switch (content_type) {
             case 'screenshot':
+                message.reply('added');
                 screenshots.push(link);
                 fs.writeFileSync("./custom_commands/data/screenshots.json", JSON.stringify(screenshots));
-                message.reply('added');
-                return;
+                break;
             case 'meme':
+                message.reply('added');
                 memes.push(link);
                 fs.writeFileSync("./custom_commands/data/memes.json", JSON.stringify(memes));
-                message.reply('added');
-                return;
+                break;
         }
     } catch (error) {
         message.reply("Error adding...");
