@@ -29,8 +29,8 @@ async function startSkullboard(client, reaction, user, skull) {
             );
             try {
                 let messageId = reaction.message.id.toString();
-                skullboard[messageId] = { "skullboard_post": "blank" }
-                skullboard[messageId]['skullboard_post'] = skullboardPost.id;
+                skullboard[messageId] = {}
+                skullboard[messageId]['skullboard_post'] = skullboardPost.id.toString();
                 skullboard = JSON.stringify(skullboard);
                 fs.writeFileSync("./skullboard/skullboard_guilds/data/skullboard.json", skullboard);
             } catch (error) {
@@ -41,7 +41,7 @@ async function startSkullboard(client, reaction, user, skull) {
 
         } else if (count > 3) {
 
-            if (reaction.message.id in skullboard) {
+            if (Object.keys(skullboard).includes(reaction.message.id.toString())) {
                 client.channels.get("1076250245584916520").messages.fetch(skullboard[reaction.message.id]['skullboard_post'])
                     .then(m => {
                         m.edit({ content: `${skull} **${count}**`, embeds: [createEmb(reaction)]})
