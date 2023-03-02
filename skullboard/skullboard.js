@@ -1,4 +1,4 @@
-const skullboard = require("./data/skullboard.json");
+const skullboard = require("/skullboard/skullboard_guilds/data/skullboard.json");
 const homiecordSkullboard = require("./skullboard_guilds/homiecord.js");
 const skull_emote = "💀";
 
