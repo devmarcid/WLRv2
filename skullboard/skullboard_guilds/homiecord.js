@@ -24,14 +24,20 @@ async function startSkullboard(client, reaction, user, skull) {
         if (count == 3) {
             //create skullboard post in channel as well as embed
 
-            var skullboardPost = await client.channels.cache.get("1076250245584916520").send(
+            const skullboardPost = await client.channels.cache.get("1076250245584916520").send(
                 { content: `${skull} **${count}**`, embeds: [createEmb(reaction)] }
             );
-
-            skullboard[reaction.message.id.toString()] = {}
-            skullboard[reaction.message.id.toString()]['skullboard_post'] = skullboardPost.id;
-            skullboard = JSON.stringify(skullboard);
-            fs.writeFileSync("./skullboard/skullboard_guilds/data/skullboard.json", skullboard);
+            try {
+                let messageId = reaction.message.id.toString();
+                skullboard[messageId] = { "skullboard_post": "blank" }
+                skullboard[messageId]['skullboard_post'] = skullboardPost.id;
+                skullboard = JSON.stringify(skullboard);
+                fs.writeFileSync("./skullboard/skullboard_guilds/data/skullboard.json", skullboard);
+            } catch (error) {
+                console.log(error);
+                console.log(count);
+                console.log(skullboardPost);
+            }
 
         } else if (count > 3) {
 
