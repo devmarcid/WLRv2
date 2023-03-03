@@ -96,31 +96,31 @@ client.on(Events.MessageCreate, async (message) => {
 	}
 });
 
-client.on(Events.MessageReactionAdd, async (reaction, user) => {
+// client.on(Events.MessageReactionAdd, async (reaction, user) => {
 
 
-	if (reaction.partial) {
-        try {
-            console.log("await reaction.fetch();");
-            await reaction.fetch();
-        } catch (error) {
-            console.log(error);
-            return;
-        }
-    }
+// 	if (reaction.partial) {
+//         try {
+//             console.log("await reaction.fetch();");
+//             await reaction.fetch();
+//         } catch (error) {
+//             console.log(error);
+//             return;
+//         }
+//     }
 
-	try {
+// 	try {
 
-		const sBoard = require("./skullboard/skullboard.js");
-		sBoard.initSkullboard(client, reaction, user);
+// 		const sBoard = require("./skullboard/skullboard.js");
+// 		sBoard.initSkullboard(client, reaction, user);
 
-	} catch (error) {
-		console.log("skullboard didn't work");
-		console.log(error);
-	}
+// 	} catch (error) {
+// 		console.log("skullboard didn't work");
+// 		console.log(error);
+// 	}
 
 	
 
 
 
-});
+// });
