@@ -1,4 +1,4 @@
-const permissions = require("./../commands/data/permissions.json");
+const permissions = require("./data/permissions.json");
 
 function makeEcho(client, message) {
     if (permissions.includes(message.author.id.toString())) {
