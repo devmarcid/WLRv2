@@ -110,12 +110,12 @@ function deleteContent(client, message, content_type) {
     try {
         switch (content_type) {
             case 'screenshot':
-                message.reply('deleting...');
+                message.channel.send('deleting...');
                 screenshots = removeValue(screenshots, link, message);            
                 fs.writeFileSync("./custom_commands/data/screenshots.json", JSON.stringify(screenshots));
                 break;
             case 'meme':
-                message.reply('deleting...');
+                message.channel.send('deleting...');
                 memes = removeValue(memes, link, message);
                 fs.writeFileSync("./custom_commands/data/memes.json", JSON.stringify(memes));
                 break;
