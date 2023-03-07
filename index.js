@@ -76,13 +76,16 @@ client.on(Events.MessageCreate, async (message) => {
 			speakCommand.makeEcho(client, message);
 			return;
 		case ",ss":
+			if (hc.forceChannel(client, message) == false) return;
 			hc.sendContent(client, message, 'screenshot');
 			return;
 		case ",m": 
+		    if (hc.forceChannel(client, message) == false) return;
 			hc.sendContent(client, message, 'meme');
 			return;
 		case ",meme":
 			//repeat because I am using it as an alias.
+			if (hc.forceChannel(client, message) == false) return;
 			hc.sendContent(client, message, 'meme');
 			return;
 		case ",addss":
@@ -90,7 +93,13 @@ client.on(Events.MessageCreate, async (message) => {
 			return;
 		case ",addm":
 			hc.addContent(client, message, 'meme');
-			break;
+			return;
+		case ",delm":
+			hc.deleteContent(client, message, 'meme');
+			return;
+		case ",delss":
+			hc.deleteContent(client, message, 'screenshot');
+			return;
 		default:
 			return;
 	}

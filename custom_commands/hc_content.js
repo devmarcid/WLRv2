@@ -65,5 +65,64 @@ function addContent(client, message, content_type) {
     }
 }
 
+function forceChannel(client, message) {
 
-module.exports = { sendContent, addContent };
+    const wlrChannel = message.guild.channels.cache.find(channel => channel.name.toLowerCase() === `wlrbot-commands`);
+
+    if (!wlrChannel) {
+        message.reply("WLR Channel not found. Make sure to name it #wlrbot-commands.");
+        return false;   
+    }
+
+    if (message.channel.id != wlrChannel.id) {
+        message.delete();
+        message.channel.send(`<@${message.author.id}> please use <#${wlrChannel.id}>.`);
+        return false;
+    }
+}
+
+function removeValue(arr, value, message) {
+        
+    for (var i=0;i<arr.length;i++) {
+        if (arr[i] == value) {
+            arr.splice(i, 1);
+            message.reply("successfully deleted.");
+            return arr;
+        }
+    }
+    message.reply("couldn't find link.");
+    return arr;
+
+}
+function deleteContent(client, message, content_type) {
+    if (permissions.includes(message.author.id.toString()) == false) {
+        message.reply("No perms. stfu");
+        return;
+    } 
+    if ((message.content.split(" ").length <= 1) || (message.content.split(" ").length >= 3)) {
+        message.reply("Invalid. stfu");
+        return;
+    }
+
+    let link = message.content.split(" ")[1];
+    try {
+        switch (content_type) {
+            case 'screenshot':
+                message.reply('deleting...');
+                screenshots = removeValue(screenshots, link, message);            
+                fs.writeFileSync("./custom_commands/data/screenshots.json", JSON.stringify(screenshots));
+                break;
+            case 'meme':
+                message.reply('deleting...');
+                memes = removeValue(memes, link, message);
+                fs.writeFileSync("./custom_commands/data/memes.json", JSON.stringify(memes));
+                break;
+        }
+    } catch (error) {
+        message.reply("Error adding...");
+        console.log(error);
+    }
+}
+
+
+module.exports = { sendContent, addContent, forceChannel, deleteContent };
