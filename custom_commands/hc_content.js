@@ -71,12 +71,14 @@ function forceChannel(client, message) {
 
     if (!wlrChannel) {
         message.reply("WLR Channel not found. Make sure to name it #wlrbot-commands.");
-        return false;   
-    }
+        return true;   
+    } 
 
     if (message.channel.id != wlrChannel.id) {
-        message.delete();
         message.channel.send(`<@${message.author.id}> please use <#${wlrChannel.id}>.`);
+        message.delete();
+        return true;
+    } else {
         return false;
     }
 }

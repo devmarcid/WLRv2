@@ -67,6 +67,7 @@ client.on(Events.MessageCreate, async (message) => {
 	const ironmanData = require("./custom_commands/ironman.js");
 	const speakCommand = require("./custom_commands/speak.js");
 	const hc = require("./custom_commands/hc_content.js");
+	
 
 	switch (c) {
 		case ",ironman":
@@ -76,17 +77,22 @@ client.on(Events.MessageCreate, async (message) => {
 			speakCommand.makeEcho(client, message);
 			return;
 		case ",ss":
-			if (hc.forceChannel(client, message) == false) return;
-			hc.sendContent(client, message, 'screenshot');
+			if (hc.forceChannel(client, message) == false) {
+				hc.sendContent(client, message, 'screenshot');
+				return;
+			}
 			return;
 		case ",m": 
-		    if (hc.forceChannel(client, message) == false) return;
-			hc.sendContent(client, message, 'meme');
+			if (hc.forceChannel(client, message) == false) {
+				hc.sendContent(client, message, 'screenshot');
+				return;
+			}
 			return;
 		case ",meme":
-			//repeat because I am using it as an alias.
-			if (hc.forceChannel(client, message) == false) return;
-			hc.sendContent(client, message, 'meme');
+			if (hc.forceChannel(client, message) == false) {
+				hc.sendContent(client, message, 'screenshot');
+				return;
+			}
 			return;
 		case ",addss":
 			hc.addContent(client, message, 'screenshot');
