@@ -97,6 +97,9 @@ client.on(Events.MessageCreate, async (message) => {
 		case ",delss":
 			hc.deleteContent(client, message, 'screenshot');
 			return;
+		case ",commands":
+			let res = ",ironman <number>\n,speak - only certain users\n,ss\n,m\n,meme\n,addss - only certain users\n,addm - only certain users\n,delm - only certain users\n,delss - only certain users"
+			message.reply(res);
 		default:
 			return;
 	}
