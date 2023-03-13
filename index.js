@@ -55,12 +55,6 @@ client.on(Events.MessageCreate, async (message) => {
 		return;
 	}
 
-	let cmds = [",memepermit", ",sspermit", ",memerevoke", ",ssrevoke", ",ssperms", ",memeperms"];
-	if (cmds.includes(message.content.split(" ")[0])) {
-		message.reply("WIP; Will be back soon.");
-		return;
-	}
-
 	//going to use switch statements/functions from seperate files for ',command's instead 
 
 	const c = message.content.split(" ")[0];
