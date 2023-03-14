@@ -3,6 +3,8 @@ var memes = require("./data/memes.json");
 var permissions = require("./data/permissions.json");
 const fs = require("fs");
 
+
+
 function getRandom(arr) {
     var n = 1;
     var result = new Array(n),
@@ -126,19 +128,75 @@ function deleteContent(client, message, content_type) {
     }
 }
 function requestContent(client, message, content_type) {
+    const marcid = client.users.cache.get("552883292077293588");
     if ((message.content.split(" ").length <= 1) || (message.content.split(" ").length >= 3)) {
         message.reply("Invalid. stfu");
         return;
     }
 
+    
     let link = message.content.split(" ")[1];
-    const marcid = client.users.cache.get("552883292077293588");
     marcid.send(`**User**: ${message.author.username}\n**Type**: ${content_type}\n**Link**: ${link}`);
 	message.reply("Submitted");
     return;
         
     
 }
+//REPETITIVE CODE - Refactor later
+function permitUser(client, message, opt) {
+    const marcid = client.users.cache.get("552883292077293588");
+    if (message.author.id.toString() == marcid.id.toString()) {
+        if (opt == 'permit') {
+            if (message.content.split(" ").length <= 1 || (message.content.split(" ").length >=3)) {
+                message.reply("stfu.");
+                return;
+            }
+            const user = message.mentions.users.first();
+            if (user === undefined) {
+                message.reply("User doesn't exist.");
+                return;
+            }
+            permissions.push(user.id.toString());
+            fs.writeFileSync("./custom_commands/data/permissions.json", JSON.stringify(permissions));
+            message.reply(`Granted ${user.username} permissions to add and remove memes/screenshots.`);
+            return;
+        }
+        if (opt == 'revoke') {
+            if (message.content.split(" ").length <= 1 || (message.content.split(" ").length >=3)) {
+                message.reply("stfu.");
+                return;
+            }
+            const user = message.mentions.users.first();
+            if (user === undefined) {
+                message.reply("User doesn't exist.");
+                return;
+            }
+            for (var i=0;i<permissions.length;i++) {
+                if (permissions[i] == user.id.toString()) {
+                    permissions.splice(i, 1);
+                    fs.writeFileSync("./custom_commands/data/permissions.json", JSON.stringify(permissions));
+                    message.reply(`permissions removed for ${user.username}.`);
+                    return;
+                }
+            }
+            message.reply(`${user.username} doesn't have permissions yet.`);
+            return;
+        }
+        if (opt == 'list') {
+            var usersPermitted = [];
+            for (var i=0;i<permissions.length;i++) {
+                tempUser = client.users.cache.get(permissions[i]);
+                if (tempUser == undefined) {
+                    message.reply("Invalid user");
+                    return;
+                }
+                usersPermitted.push(tempUser.username);
+            }
+            message.reply(usersPermitted.join("\n"));
+            return;
+        }
 
+    }    
+}
 
-module.exports = { sendContent, addContent, forceChannel, deleteContent, requestContent };
+module.exports = { sendContent, addContent, forceChannel, deleteContent, requestContent, permitUser };

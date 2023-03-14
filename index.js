@@ -98,8 +98,17 @@ client.on(Events.MessageCreate, async (message) => {
 			hc.requestContent(client, message, 'meme');
 			return;
 		case ",commands":
-			let res = ",reqm <link> - request meme submission\n,reqss <link> - request screenshot submission\n,ironman <number>\n,speak - only certain users\n,ss\n,m\n,meme\n,addss - only certain users\n,addm - only certain users\n,delm - only certain users\n,delss - only certain users"
+			let res = ",permit - grant permissions to add/remove screenshots/memes\n,revoke - remove permissions to add/remove screenshots/memes\n,perms - list all permissions\nreqm <link> - request meme submission\n,reqss <link> - request screenshot submission\n,ironman <number>\n,speak - only certain users\n,ss\n,m\n,meme\n,addss - only certain users\n,addm - only certain users\n,delm - only certain users\n,delss - only certain users"
 			message.reply(res);
+		case ",permit":
+			hc.permitUser(client, message, 'permit');
+			return;
+		case ",revoke":
+			hc.permitUser(client, message, 'revoke');
+			return;
+		case ",perms":
+			hc.permitUser(client, message, 'list');
+			return;
 		default:
 			return;
 	}
