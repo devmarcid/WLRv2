@@ -134,6 +134,7 @@ function requestContent(client, message, content_type) {
     let link = message.content.split(" ")[1];
     const marcid = client.users.cache.get("552883292077293588");
     marcid.send(`**User**: ${message.author.username}\n**Type**: ${content_type}\n**Link**: ${link}`);
+	message.reply("Submitted");
     return;
         
     
