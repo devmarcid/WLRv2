@@ -125,6 +125,19 @@ function deleteContent(client, message, content_type) {
         console.log(error);
     }
 }
+function requestContent(client, message, content_type) {
+    if ((message.content.split(" ").length <= 1) || (message.content.split(" ").length >= 3)) {
+        message.reply("Invalid. stfu");
+        return;
+    }
+
+    let link = message.content.split(" ")[1];
+    const marcid = client.users.cache.get("552883292077293588");
+    marcid.send(`**User**: ${message.author.username}\n**Type**: ${content_type}\n**Link**: ${link}`);
+    return;
+        
+    
+}
 
 
-module.exports = { sendContent, addContent, forceChannel, deleteContent };
+module.exports = { sendContent, addContent, forceChannel, deleteContent, requestContent };

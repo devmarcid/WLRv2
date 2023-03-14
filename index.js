@@ -91,8 +91,14 @@ client.on(Events.MessageCreate, async (message) => {
 		case ",delss":
 			hc.deleteContent(client, message, 'screenshot');
 			return;
+		case ",reqss":
+			hc.requestContent(client, message, 'screenshot');
+			return;
+		case ",reqm":
+			hc.requestContent(client, message, 'meme');
+			return;
 		case ",commands":
-			let res = ",ironman <number>\n,speak - only certain users\n,ss\n,m\n,meme\n,addss - only certain users\n,addm - only certain users\n,delm - only certain users\n,delss - only certain users"
+			let res = ",reqm <link> - request meme submission\n,reqss <link> - request screenshot submission\n,ironman <number>\n,speak - only certain users\n,ss\n,m\n,meme\n,addss - only certain users\n,addm - only certain users\n,delm - only certain users\n,delss - only certain users"
 			message.reply(res);
 		default:
 			return;
