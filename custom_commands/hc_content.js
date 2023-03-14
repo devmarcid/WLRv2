@@ -143,7 +143,7 @@ function requestContent(client, message, content_type) {
     
 }
 //REPETITIVE CODE - Refactor later
-function permitUser(client, message, opt) {
+async function permitUser(client, message, opt) {
     const marcid = client.users.cache.get("552883292077293588");
     if (message.author.id.toString() == marcid.id.toString()) {
         if (opt == 'permit') {
@@ -185,7 +185,7 @@ function permitUser(client, message, opt) {
         if (opt == 'list') {
             var usersPermitted = [];
             for (var i=0;i<permissions.length;i++) {
-                tempUser = client.users.cache.get(permissions[i]);
+                tempUser = await client.users.fetch(permissions[i]);
                 if (tempUser == undefined) {
                     message.reply("Invalid user");
                     return;
