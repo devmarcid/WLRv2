@@ -148,7 +148,7 @@ function permitUser(client, message, opt) {
     if (message.author.id.toString() == marcid.id.toString()) {
         if (opt == 'permit') {
             if (message.content.split(" ").length <= 1 || (message.content.split(" ").length >=3)) {
-                message.reply("stfu.");
+                message.reply("stfu. haha!");
                 return;
             }
             const user = message.mentions.users.first();
