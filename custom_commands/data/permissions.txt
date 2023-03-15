@@ -1,1 +1,2 @@
 slxyr, wool, me, sakurai, recetku, tio
+//Discriminators listed for users who have permissions to use custom commands within homiecord. refer to permissions.txt for actual list of users. 

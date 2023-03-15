@@ -6,7 +6,11 @@ var permissions = require("./data/permissions.json");
 const fs = require("fs");
 
 
-
+class hCord {
+    constructor(client, message) {
+        this.marcid = client.users.cache.get("552883292077293588");
+    }
+}
 function getRandom(arr) {
     var n = 1;
     var result = new Array(n),
