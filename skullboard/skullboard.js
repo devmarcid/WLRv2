@@ -1,3 +1,5 @@
+//might do a potential overhaul on the entire js file to get it running correctly and with more features.
+
 const skullboard = require("./data/skullboard.json");
 const skull_emote = "💀";
 const fs = require("fs");
