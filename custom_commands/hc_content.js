@@ -1,3 +1,5 @@
+//Go over case statements. catch statements could potentially be the case in terms of the bot responding twice when adding something to screenshots or memes.
+//Shield @CrimsonWeave
 var screenshots = require("./data/screenshots.json");
 var memes = require("./data/memes.json");
 var permissions = require("./data/permissions.json");
