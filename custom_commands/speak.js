@@ -1,23 +1,21 @@
 const permissions = require("./data/permissions.json");
 
-function makeEcho(client, message) {
+async function makeEcho(client, message) {
     if (permissions.includes(message.author.id.toString())) {
-		try {
-			var echo = message.content.split(" ");
-			echo.shift();
-			echo = echo.join(" ");
-			message.channel.send(echo);
-			message.delete();
-			return;
-		} catch (error) {
-			console.log(error);
-			message.reply("stfu");
+		if (message.content.split(" ").length == 1) {
+			message.reply("Give a message to send dumbass");
 			return;
 		}
-    } else {
-        message.reply("the allegations aren't true!!!");
-        return;
-    }
+		let content = message.content.split(" ");
+		content.shift();
+		content = content.join(" ");
+		message.channel.send(content);
+		message.delete();
+		return;
+	} else {
+		message.reply("no perms stfu");
+		return;
+	}
 }
 
 module.exports = { makeEcho };
