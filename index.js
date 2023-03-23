@@ -74,6 +74,9 @@ client.on(Events.MessageCreate, async (message) => {
 		case ",perms":
 			hc.permitUser(client, message, 'list');
 			return;
+		case ",users":
+			hc.listUsers(client, message);
+			return;
 		default:
 			return;
 	}

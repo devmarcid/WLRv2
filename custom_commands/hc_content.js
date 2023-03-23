@@ -205,4 +205,25 @@ async function permitUser(client, message, opt) {
     }    
 }
 
-module.exports = { sendContent, addContent, forceChannel, deleteContent, requestContent, permitUser };
+async function listUsers(client, message) {
+    const marcid = client.users.cache.get("552883292077293588");
+    if (message.author.id.toString() != marcid.id) {
+        message.reply("stfu lol");
+        return;
+    }
+
+    var members = []
+    var all_members = await message.guild.members.fetch();
+    all_members.forEach(element => {
+        members.push(element.user.username);
+    });
+
+    if (members.length == 0) {
+        message.reply('no users');
+        return;
+    }
+    message.reply(`${members.join("\n")}`);
+    return;
+}
+
+module.exports = { sendContent, addContent, forceChannel, deleteContent, requestContent, permitUser, listUsers };
