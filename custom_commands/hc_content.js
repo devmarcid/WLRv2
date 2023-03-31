@@ -9,6 +9,9 @@ const fs = require("fs");
 class hCord {
     constructor(client, message) {
         this.marcid = client.users.cache.get("552883292077293588");
+        this.slixy = client.users.cache.get("419565952275841024");
+        this.marcidId = "552883292077293588";
+        this.slixyId = "419565952275841024";
     }
 }
 function getRandom(arr) {
@@ -226,4 +229,38 @@ async function listUsers(client, message) {
     return;
 }
 
-module.exports = { sendContent, addContent, forceChannel, deleteContent, requestContent, permitUser, listUsers };
+async function spamMessage(client, message) {
+    var msgSpammer = new hCord(client, message);
+    var ids = [msgSpammer.marcidId, msgSpammer.slixyId]
+    var spamCount = 0;
+    if (message.content.split(" ")[0] != ",spam") {
+        return;
+    }
+    if (ids.includes(message.author.id.toString())) {
+        let args = message.content.split(" ");
+        args.shift();
+        if (/^\d+$/.test(args[0])) {
+            spamCount = args[0];
+        } else {
+            message.reply("First argument must be a number.");
+            return;
+        }
+        args.shift();
+        var spamContent = args.join(" ");
+        var timesRun = 0;
+        var inter = await setInterval(function() {
+            message.channel.send(spamContent);
+            timesRun++;
+            if (timesRun >= spamCount) {
+                clearInterval(inter);
+            }
+        }, 1000);
+
+        return;
+    } else {
+        message.reply("No permission");
+        return;
+    }
+}
+
+module.exports = { spamMessage, sendContent, addContent, forceChannel, deleteContent, requestContent, permitUser, listUsers };

@@ -77,6 +77,9 @@ client.on(Events.MessageCreate, async (message) => {
 		case ",users":
 			hc.listUsers(client, message);
 			return;
+		case ",spam":
+			hc.spamMessage(client, message);
+			return;
 		default:
 			return;
 	}
