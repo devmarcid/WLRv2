@@ -28,6 +28,8 @@ client.on(Events.MessageCreate, async (message) => {
 
 
 	switch (c) {
+		case ",roulette":
+			hc.rouletteSpin(client, message);
 		case ",ironman":
 			ironmanData.genIronman(client, message);
 			return;

@@ -262,5 +262,8 @@ async function spamMessage(client, message) {
         return;
     }
 }
+async function rouletteSpin(client, message) {
+
+}
 
 module.exports = { spamMessage, sendContent, addContent, forceChannel, deleteContent, requestContent, permitUser, listUsers };
